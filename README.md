@@ -16,10 +16,10 @@ c || mac <- AEGIS-256(key = k, nonce = n || i, msg = T || M)
 n <- n ^ mac[0..24]
 i <- i + 1
 if i = 0 or T = ChunkFlag.Rekey:
-   rekey()
+   Rekey()
 ```
 
-As Libsodium doesn't offer a [stream cipher API](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead#name-aegis-as-a-stream-cipher) for AEGIS-256, rekeying requires computing an authentication tag (`mac`). This data is ignored/discarded because it [shouldn't](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead#name-security-considerations) be used for key derivation.
+As Libsodium doesn't offer a [stream cipher API](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead#section-7) for AEGIS-256, rekeying requires computing an authentication tag (`mac`). This data is ignored/discarded because it [shouldn't](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-aegis-aead#section-8) be used for key derivation.
 
 ```
 k || n || mac <- AEGIS-256(key = key, nonce = n || i, msg = k || n)
